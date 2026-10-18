@@ -1,0 +1,6 @@
+{
+  "name": "SKIRZ",
+  "description": "Full-Stack E-Commerce Marketplace and Dropshipping Store - Shop Smart. Live Better.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
