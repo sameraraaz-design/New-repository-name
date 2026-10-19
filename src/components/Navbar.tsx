@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, ShoppingBag, Heart, User as UserIcon, Shield, Sparkles } from 'lucide-react';
+import { Search, ShoppingBag, Heart, User as UserIcon, Shield, Sparkles, Download } from 'lucide-react';
 import { Logo } from './Logo.tsx';
 import { User } from '../types/index.ts';
 
@@ -12,6 +12,7 @@ interface NavbarProps {
   onOpenCart: () => void;
   onOpenAccount: () => void;
   onOpenAdmin: () => void;
+  onOpenInstallModal: () => void;
   onSelectCategory: (slug: string) => void;
 }
 
@@ -24,6 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenCart,
   onOpenAccount,
   onOpenAdmin,
+  onOpenInstallModal,
   onSelectCategory,
 }) => {
   return (
@@ -74,6 +76,17 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Zone 3: Primary Action Cluster */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          {/* Install Mobile App / APK Button */}
+          <button
+            onClick={onOpenInstallModal}
+            title="Install SKIRZ App / Download APK"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors"
+          >
+            <Download className="w-3.5 h-3.5 text-blue-600" />
+            <span className="hidden sm:inline">Get App (APK)</span>
+            <span className="sm:hidden">App</span>
+          </button>
+
           {/* Admin Switcher Shortcut */}
           <button
             onClick={onOpenAdmin}

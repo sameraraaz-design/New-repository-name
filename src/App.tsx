@@ -25,6 +25,8 @@ import { AccountModal } from './components/AccountModal.tsx';
 import { AdminDashboardModal } from './components/AdminDashboardModal.tsx';
 import { Footer } from './components/Footer.tsx';
 import { MobileBottomNav } from './components/MobileBottomNav.tsx';
+import { InstallAppModal } from './components/InstallAppModal.tsx';
+import { usePWAInstall } from './utils/usePWAInstall.ts';
 
 import {
   Category,
@@ -103,7 +105,10 @@ export default function App() {
   const [trackingOrder, setTrackingOrder] = useState<Order | null>(null);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
   const [mobileTab, setMobileTab] = useState<'home' | 'categories' | 'wishlist' | 'orders' | 'account'>('home');
+
+  const { isInstallable, install: handlePWAInstall } = usePWAInstall();
 
   // Filters & Search
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -310,6 +315,7 @@ export default function App() {
         onOpenCart={() => setIsCartOpen(true)}
         onOpenAccount={() => setIsAccountOpen(true)}
         onOpenAdmin={() => setIsAdminOpen(true)}
+        onOpenInstallModal={() => setIsInstallModalOpen(true)}
         onSelectCategory={(slug) => {
           setSelectedCategory(slug);
           setSearchQuery('');
@@ -661,6 +667,14 @@ export default function App() {
         categories={categories}
         suppliers={suppliers}
         onRefreshData={fetchData}
+      />
+
+      {/* 8. Install Mobile App / APK Modal */}
+      <InstallAppModal
+        isOpen={isInstallModalOpen}
+        onClose={() => setIsInstallModalOpen(false)}
+        isInstallable={isInstallable}
+        onInstall={handlePWAInstall}
       />
     </div>
   );
